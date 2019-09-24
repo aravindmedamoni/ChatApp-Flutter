@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/home/abhi/development/flutter"
-export "FLUTTER_APPLICATION_PATH=/home/abhi/AndroidStudioProjects/FlutterProjects/flash-chat-flutter"
+export "FLUTTER_APPLICATION_PATH=/home/abhi/AndroidStudioProjects/FlutterProjects/ChatApp-Flutter/flash-chat-flutter"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
