@@ -24,18 +24,28 @@ class _ChatScreenState extends State<ChatScreen> {
     getCurrentUser();
   }
 
-  void getCurrentUser() async{
-    try{
+  void getCurrentUser() async {
+    try {
       final user = await _auth.currentUser();
 
-      if(user != null){
+      if (user != null) {
         currentUser = user;
         print(currentUser.email);
       }
-    }catch(e){
+    } catch (e) {
       print(e);
     }
+  }
 
+  void getUserData() async {
+//    final messages = await _firestore.collection('message').document(currentUser.uid).collection('SentMessages').getDocuments();
+//    for(var message in messages.documents){
+//      print(message.data);
+//    }
+   await for(var snopshot in _firestore.collection('message').document(currentUser.uid).collection('SentMessages').snapshots())
+     for(var message in snopshot.documents){
+       print(message.data);
+     }
   }
 
   @override
@@ -49,8 +59,9 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: Icon(Icons.close),
               onPressed: () {
                 //Implement logout functionality
-                _auth.signOut();
-                Navigator.pop(context);
+//                _auth.signOut();
+//                Navigator.pop(context);
+                getUserData();
               }),
         ],
 
@@ -82,9 +93,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       //Implement send functionality.
-                      _firestore.collection('message').document(currentUser.uid).collection('SentMessages').add({
-                        'text':messageText,
-                        'sender':currentUser.email,
+                      _firestore.collection('message')
+                          .document(currentUser.uid)
+                          .collection('SentMessages')
+                          .add({
+                        'text': messageText,
+                        'sender': currentUser.email,
                       });
                     },
                     child: Text(
