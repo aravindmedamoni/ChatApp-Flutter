@@ -13,7 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final textFieldController = TextEditingController();
+  final emailTextFieldController = TextEditingController();
+  final passwordTextFieldController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   String userEmail;
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 48.0,
                   ),
                   TextField(
-                    controller: textFieldController,
+                    controller: emailTextFieldController,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
                       color: Colors.black87,
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 8.0,
                   ),
                   TextField(
-                    controller: textFieldController,
+                    controller: passwordTextFieldController,
                     obscureText: true,
                     style: TextStyle(
                       color: Colors.black87,
@@ -90,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: RoundedButton(
                           colour: Colors.lightBlueAccent,
                           onPress: () async {
-                            textFieldController.clear();
+                            emailTextFieldController.clear();
+                            passwordTextFieldController.clear();
                             setState(() {
                               showSpinner = true;
                             });
